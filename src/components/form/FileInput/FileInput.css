@@ -1,0 +1,28 @@
+.file-input_displayed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px dashed #cccccc;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-input__btn-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.file-input__error-display {
+  color: red;
+}

@@ -1,0 +1,40 @@
+.file-list {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  width: 740px;
+}
+
+.file-list__item {
+  font-size: 16px;
+  line-height: 50px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  width: 50%;
+  height: 50px;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.file-list__item button {
+  float: right;
+  height: 30px;
+  background-color: white;
+  color: #ff6666;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.file-list__item button:focus {
+  outline: none;
+}
+
+.file-list__item div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.4;
+}

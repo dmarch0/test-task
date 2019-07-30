@@ -1,0 +1,29 @@
+.attach-files-btn {
+  display: block;
+  color: #0055fb;
+  background-color: white;
+  border: 2px hidden #45a5ff;
+  cursor: pointer;
+  margin-left: 30px;
+  padding: 0px;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+
+.attach-files-btn:focus {
+  border: 2px solid #45a5ff;
+  opacity: 0.5;
+  border-radius: 7px;
+  outline: none;
+  margin-left: 30px;
+  padding: 0px;
+}
+
+.attach-files-btn:active {
+  padding: 0px;
+}
+
+.attach-files-btn:hover {
+  opacity: 0.7;
+}

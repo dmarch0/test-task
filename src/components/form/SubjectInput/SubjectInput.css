@@ -1,0 +1,33 @@
+.subject-input {
+  width: 740px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.subject-input__label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.subject-input__field {
+  font-size: 18px;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  height: 40px;
+  width: 100%;
+  box-sizing: border-box;
+  color: #000000;
+  padding-left: 10px;
+}
+
+.subject-input__field::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.subject-input__error-display {
+  padding-top: 5px;
+  color: #ff6666;
+}
