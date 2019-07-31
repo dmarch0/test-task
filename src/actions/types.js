@@ -5,7 +5,6 @@ export const REMOVE_FILE = "REMOVE_FILE";
 //Error types
 export const FILE_ERROR = "FILE_ERROR";
 export const VALIDATION_ERROR = "VALIDATION_ERROR";
-export const SIZE_ERROR = "SIZE_ERROR";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 
 //Ui types

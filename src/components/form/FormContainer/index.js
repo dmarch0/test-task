@@ -40,12 +40,12 @@ const FormContainer = ({
       <MessageInput label="Сообщение" error={formError.message} />
       <FileListContainer />
       <AttachFilesButton />
-      <button className="main-form__btn-submit">Отправить</button>
-      {size ? (
+      {formError.files ? (
         <div className="main-form__file-size-error">
           Суммарный размер файлов не должен превышать 20 Mb
         </div>
       ) : null}
+      <button className="main-form__btn-submit">Отправить</button>
     </form>
   );
 };
@@ -54,8 +54,7 @@ const formConnected = reduxForm({ form: "main-form" })(FormContainer);
 
 const mapStateToProps = state => {
   return {
-    formError: state.error.form ? state.error.form : {},
-    size: state.error.size
+    formError: state.error.form ? state.error.form : {}
   };
 };
 

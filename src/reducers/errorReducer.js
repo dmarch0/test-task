@@ -18,11 +18,6 @@ const errorReducer = (state = initialState, action) => {
       return newState;
     case VALIDATION_ERROR:
       return { ...state, form: action.payload };
-    case SIZE_ERROR:
-      return {
-        ...state,
-        size: "Объем загруженных файлов не должен превышать 20 Мб"
-      };
     case CLEAR_ERROR:
       return {};
     default:

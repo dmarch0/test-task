@@ -1,11 +1,6 @@
 import validator from "validator";
 
-import {
-  VALIDATION_ERROR,
-  SIZE_ERROR,
-  CLEAR_ERROR,
-  LETTER_SEND
-} from "./types";
+import { VALIDATION_ERROR, CLEAR_ERROR, LETTER_SEND } from "./types";
 import { addStorageItem } from "../storage/utils";
 
 //Form keys
@@ -25,7 +20,15 @@ const isEmpty = value =>
   (typeof value === "object" && Object.keys(value).length === 0) ||
   (typeof value === "string" && value.trim().length === 0);
 
-const validateFormFields = formValues => {
+const validateFilesSize = files => {
+  let summSize = 0;
+  for (let file of files) {
+    summSize += file.size;
+  }
+  return summSize <= 20000000 ? true : false;
+};
+
+const validateFormFields = (formValues, files) => {
   const errors = {};
 
   //Convert value to empty strings to use validator
@@ -65,29 +68,22 @@ const validateFormFields = formValues => {
     errors.message = "Напишите, пожалуйста, хоть что-нибудь";
   }
 
+  if (!validateFilesSize(files)) {
+    errors.files = "Размер файлов не должен превышать 20 Mb";
+  }
+
+  console.log(errors);
   const isValid = Object.keys(errors).length === 0 ? true : false;
   return { errors, isValid };
 };
 
-const validateFilesSize = files => {
-  let summSize = 0;
-  for (let file of files) {
-    summSize += file.size;
-  }
-  return summSize <= 20000000 ? true : false;
-};
-
 export const submitForm = (formValues, reset) => (dispatch, getState) => {
+  const files = getState().files;
+
   //Validate input
-  const { errors, isValid } = validateFormFields(formValues);
+  const { errors, isValid } = validateFormFields(formValues, files);
   if (!isValid) {
     return dispatch({ type: VALIDATION_ERROR, payload: errors });
-  }
-
-  const files = getState().files;
-  //Check if summary files size exceeds 20Mb
-  if (!validateFilesSize(files)) {
-    return dispatch({ type: SIZE_ERROR });
   }
 
   //Clear possible remaining errors
@@ -123,6 +119,7 @@ export const submitForm = (formValues, reset) => (dispatch, getState) => {
       password: "xoo4Yav"
     }
   });
+
   dispatch({ type: LETTER_SEND, payload: formValues.to_email });
   sendsay
     .request(payload)

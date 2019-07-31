@@ -1,10 +1,11 @@
 {
+  "homepage": "https://daniilmarch.github.io/test-task",
   "name": "test-task",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.19.0",
     "classnames": "^2.2.6",
+    "gh-pages": "^2.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-icons": "^3.7.0",
@@ -13,14 +14,15 @@
     "redux": "^4.0.4",
     "redux-form": "^8.2.5",
     "redux-thunk": "^2.3.0",
-    "sendsay-api": "^2.3.1",
     "validator": "^11.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
