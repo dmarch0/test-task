@@ -5,6 +5,7 @@ import LettersContainer from "../letters/LettersContainer";
 import FileInput from "../form/FileInput";
 import MessageStatus from "../MessageStatus";
 import FormContainer from "../form/FormContainer";
+import "./MainWrapper.css";
 
 const MainWrapper = ({ isLetterSend }) => {
   return (
