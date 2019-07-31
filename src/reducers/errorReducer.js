@@ -2,7 +2,6 @@ import {
   FILE_ERROR,
   CLOSE_FILE_DND,
   VALIDATION_ERROR,
-  SIZE_ERROR,
   CLEAR_ERROR
 } from "../actions/types";
 

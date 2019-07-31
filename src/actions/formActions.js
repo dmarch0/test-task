@@ -20,6 +20,7 @@ const isEmpty = value =>
   (typeof value === "object" && Object.keys(value).length === 0) ||
   (typeof value === "string" && value.trim().length === 0);
 
+//Checking if file size exceeds 20 Mb
 const validateFilesSize = files => {
   let summSize = 0;
   for (let file of files) {
@@ -31,7 +32,7 @@ const validateFilesSize = files => {
 const validateFormFields = (formValues, files) => {
   const errors = {};
 
-  //Convert value to empty strings to use validator
+  //Convert values to empty strings to use validator
   for (let key of keys) {
     formValues[key] = isEmpty(formValues[key]) ? "" : formValues[key];
   }
@@ -72,7 +73,6 @@ const validateFormFields = (formValues, files) => {
     errors.files = "Размер файлов не должен превышать 20 Mb";
   }
 
-  console.log(errors);
   const isValid = Object.keys(errors).length === 0 ? true : false;
   return { errors, isValid };
 };

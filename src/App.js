@@ -3,17 +3,15 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
-import "./App.css";
-
 import reducers from "./reducers";
 import { ADD_LETTER, LETTERS_LOADING } from "./actions/types";
-
 import MainWrapper from "./components/MainWrapper";
 
 const middleware = [thunk];
-
 const store = createStore(reducers, compose(applyMiddleware(...middleware)));
 
+//If any letters in local storage
+//Send requests to check letters status
 if (localStorage.letters) {
   const sendsay = new window.Sendsay({
     auth: {
