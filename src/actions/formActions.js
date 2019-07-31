@@ -1,6 +1,14 @@
 import validator from "validator";
-import { VALIDATION_ERROR } from "./types";
 
+import {
+  VALIDATION_ERROR,
+  SIZE_ERROR,
+  CLEAR_ERROR,
+  LETTER_SEND
+} from "./types";
+import { addStorageItem } from "../storage/utils";
+
+//Form keys
 const keys = [
   "from_email",
   "from_name",
@@ -10,6 +18,7 @@ const keys = [
   "message"
 ];
 
+//Util function to check if value is empty
 const isEmpty = value =>
   value === undefined ||
   value === null ||
@@ -19,6 +28,7 @@ const isEmpty = value =>
 const validateFormFields = formValues => {
   const errors = {};
 
+  //Convert value to empty strings to use validator
   for (let key of keys) {
     formValues[key] = isEmpty(formValues[key]) ? "" : formValues[key];
   }
@@ -50,14 +60,72 @@ const validateFormFields = formValues => {
   if (validator.isEmpty(formValues.subject)) {
     errors.subject = "Тема не может быть пустой";
   }
+
+  if (validator.isEmpty(formValues.message)) {
+    errors.message = "Напишите, пожалуйста, хоть что-нибудь";
+  }
+
   const isValid = Object.keys(errors).length === 0 ? true : false;
-  console.log(errors, isValid);
   return { errors, isValid };
 };
 
-export const submitForm = formValues => dispatch => {
+const validateFilesSize = files => {
+  let summSize = 0;
+  for (let file of files) {
+    summSize += file.size;
+  }
+  return summSize <= 20000000 ? true : false;
+};
+
+export const submitForm = (formValues, reset) => (dispatch, getState) => {
+  //Validate input
   const { errors, isValid } = validateFormFields(formValues);
   if (!isValid) {
     return dispatch({ type: VALIDATION_ERROR, payload: errors });
   }
+
+  const files = getState().files;
+  //Check if summary files size exceeds 20Mb
+  if (!validateFilesSize(files)) {
+    return dispatch({ type: SIZE_ERROR });
+  }
+
+  //Clear possible remaining errors
+  dispatch({ type: CLEAR_ERROR });
+
+  //Format files
+  const payloadFiles = [];
+  for (let file of files) {
+    payloadFiles.push({
+      name: file.name,
+      content: file.content,
+      encoding: file.encoding
+    });
+  }
+
+  const payload = {
+    action: "issue.send.test",
+    letter: {
+      subject: formValues.subject,
+      "from.name": formValues.from_name,
+      "from.email": formValues.from_email,
+      "to.name": formValues.to_name,
+      message: { text: formValues.message },
+      attaches: payloadFiles
+    },
+    sendwhen: "test",
+    mca: [formValues.to_email]
+  };
+
+  const sendsay = new window.Sendsay({
+    auth: {
+      login: "daniil2305@yandex.ru",
+      password: "xoo4Yav"
+    }
+  });
+  dispatch({ type: LETTER_SEND, payload: formValues.to_email });
+  sendsay
+    .request(payload)
+    .then(res => addStorageItem({ ...res, subject: formValues.subject }))
+    .catch(err => console.log(err));
 };

@@ -1,9 +1,11 @@
 import React from "react";
 import { Field } from "redux-form";
-import cn from "classnames";
 
 import "./EmailInput.css";
 
+/* Field name is passed as from_name/to_name
+so reduxForm wond treat form fiels from.name and to.name 
+as object properties */
 const EmailInput = ({ label, person, error }) => {
   return (
     <div className="email-input">
@@ -24,12 +26,14 @@ const EmailInput = ({ label, person, error }) => {
         className="email-input__field_right"
         placeholder="Email"
       />
-      {error.name ? (
-        <div className="email-input__error-display_name">{error.name}</div>
-      ) : null}
-      {error.email ? (
-        <div className="email-input__error-display_email">{error.email}</div>
-      ) : null}
+      <div className="email-error">
+        {error.name ? (
+          <div className="email-error__name">{error.name}</div>
+        ) : null}
+        {error.email ? (
+          <div className="email-error__email">{error.email}</div>
+        ) : null}
+      </div>
     </div>
   );
 };

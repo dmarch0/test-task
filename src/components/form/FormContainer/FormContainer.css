@@ -15,6 +15,12 @@
   position: relative;
 }
 
+.main-form__file-size-error {
+  color: #ff6666;
+  margin-left: 30px;
+  margin-top: 15px;
+}
+
 .main-form__btn-submit {
   display: block;
   background: linear-gradient(180deg, #45a6ff 0%, #0055fb 100%), #c4c4c4;

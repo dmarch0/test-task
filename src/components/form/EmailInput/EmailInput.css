@@ -42,10 +42,23 @@
   border-radius: 0px 5px 5px 0px;
 }
 
-.email-input__error-display_email,
-.email-input__error-display_name {
+.email-error__email,
+.email-error__name {
   display: inline-block;
   width: 50%;
   color: #ff6666;
   padding-top: 5px;
+}
+
+.email-error__email {
+  float: right;
+}
+
+.email-error__name {
+  float: left;
+}
+
+.email-error {
+  margin-bottom: 30px;
+  height: 20px;
 }

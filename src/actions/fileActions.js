@@ -9,9 +9,12 @@ const validateFileSize = fileSize => {
 };
 
 export const addFile = file => dispatch => {
+  //Check if file extension matches allowed file types
   if (!validateFileExtension(file.name)) {
     return dispatch({ type: FILE_ERROR, payload: "Неподходящий тип файла" });
   }
+
+  //Check if file size exceeds 5 Mb
   if (!validateFileSize(file.size)) {
     return dispatch({
       type: FILE_ERROR,
@@ -19,7 +22,7 @@ export const addFile = file => dispatch => {
     });
   }
 
-  const newFile = { name: file.name, encoding: "base64" };
+  const newFile = { name: file.name, encoding: "base64", size: file.size };
 
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -28,6 +31,7 @@ export const addFile = file => dispatch => {
     reader.onerror = () => reject(reader.error);
   })
     .then(result => {
+      //Add new file to store, close find dnd
       dispatch({ type: CLOSE_FILE_DND });
       dispatch({ type: ADD_FILE, payload: { ...newFile, content: result } });
     })

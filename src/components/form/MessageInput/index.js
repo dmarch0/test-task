@@ -3,7 +3,7 @@ import { Field } from "redux-form";
 
 import "./MessageInput.css";
 
-const MessageInput = ({ label }) => {
+const MessageInput = ({ label, error }) => {
   return (
     <div className="message-input">
       <label className="message-input__label">{label}</label>
@@ -14,6 +14,9 @@ const MessageInput = ({ label }) => {
         placeholder="Текст сообщения"
         id="message"
       />
+      {error ? (
+        <div className="message-input__error-display">{error}</div>
+      ) : null}
     </div>
   );
 };

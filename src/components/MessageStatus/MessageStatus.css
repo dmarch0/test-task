@@ -1,0 +1,22 @@
+.message-status {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 100px;
+  margin-bottom: 100px;
+}
+
+.message-status__btn-reload {
+  background-color: white;
+  border: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.message-status__btn-reload:focus {
+  outline: none;
+}
