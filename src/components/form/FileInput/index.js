@@ -16,7 +16,9 @@ const FileInput = ({ addFile, isDisplayed, closeDnd, fileError }) => {
       })}
       onDrop={event => {
         event.preventDefault();
-        addFile(event.dataTransfer.files[0]);
+        for (let file of event.dataTransfer.files) {
+          addFile(file);
+        }
       }}
       onDragOver={event => {
         event.preventDefault();
